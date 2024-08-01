@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background: url('c:\portfolio2.avif') no-repeat center center fixed;
+            background-size: cover;
+            color: #f0f0f0;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 2em;
+            background: rgba(0, 0, 0, 0.7); /* Darker background with opacity */
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: slideUp 1s ease-out;
+        }
+        .profile-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2em;
+            justify-content: center;
+            animation: fadeIn 2s ease-in-out;
+            border-bottom: 2px solid #444;
+            padding-bottom: 1em;
+        }
+        .profile-details {
+            flex-grow: 1;
+            text-align: center;
+        }
+        .profile-details h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-in-out;
+        }
+        .profile-details p {
+            margin: 0.5em 0;
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .main-content h2 {
+            font-size: 2.5em;
+            color: #f0f0f0;
+            text-align: center;
+            margin-bottom: 1em;
+            animation: fadeIn 2s ease-in-out;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .details-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+        }
+        .section {
+            padding: 1.5em;
+            border-radius: 8px;
+            background: #333;
+            animation: fadeIn 2s ease-in-out;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+        .section:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+        .section h3 {
+            font-size: 1.8em;
+            border-bottom: 2px solid #666;
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+            animation: bounceIn 1s ease-out;
+            color: #f0f0f0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .section p, .section ul {
+            margin: 0.5em 0;
+        }
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .section ul li {
+            margin-bottom: 0.5em;
+        }
+        .project-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .project {
+            flex: 1 1 calc(33.333% - 1rem);
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeIn 2s ease-in-out;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        .project img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .project:hover img {
+            transform: scale(1.1);
+        }
+        .project a {
+            display: block;
+            text-decoration: none;
+        }
+        .project h3 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            font-size: 1.3em;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .project:hover h3 {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-10px);
+        }
+        @media (max-width: 768px) {
+            .project {
+                flex: 1 1 calc(50% - 1rem);
+            }
+        }
+        @media (max-width: 480px) {
+            .project {
+                flex: 1 1 100%;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-section">
+            <div class="profile-details">
+                <h1>Yash</h1>
+                <p style="font-size: x-large; font-weight: bold;">About Me:</p>
+                <p><strong>Hello! I'm Yash, a web developer with a strong foundation in HTML, CSS . I enjoy building clean, responsive websites and learning new technologies. Feel free to explore my work and get in touch!</strong></p>
+            </div>
+        </div>
+        <div class="main-content">
+            <h2>My Portfolio</h2>
+            <div class="details-section">
+                <div class="section">
+                    <h3>Education</h3>
+                    <ul>
+                        <li>
+                            <strong>Bachelor of Computer Applications (BCA) - 3rd Year</strong><br>
+                            <span>Ambedkar University, Nagpur</span><br>
+                            <span>Expected Graduation: 2025</span><br>
+                            <em>Relevant Coursework: Web Development, Data Structures, Database Management Systems</em><br>
+                            <em>Projects: Developed a dynamic web application for student management</em><br>
+                            <em>Achievements: Dean's List for Academic Excellence (2023)</em><br>
+                            <em>Extracurricular Activities: Member of the Programming Club</em>
+                        </li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Skills</h3>
+                    <ul style="list-style-type: decimal;">
+                        <li>HTML/CSS</li>
+                        <li>JavaScript</li>
+                        <li>C Language</li>
+                        <li>C++</li>
+                    </ul>
+                </div>
+                <div class="section">
+                    <h3>Experience</h3>
+                    <p><strong>Junior Web Developer Intern at Digitron</strong><br>
+                    <em>June 2023 - August 2023</em><br>
+                    Assisted in developing and maintaining web applications using HTML, CSS .<br>
+                    Contributed to the creation of responsive web designs and user interfaces.<br>
+                    Collaborated with senior developers to troubleshoot and resolve technical issues.<br>
+                    Gained hands-on experience with version control systems like Git.</p>
+                </div>
+                <div class="section">
+                    <h3>Projects</h3>
+                    <div class="project-grid">
+                        <div class="project">
+                            <a href="project1.html">
+                                <img src="thumbnail1.jpg" alt="Project 1">
+                                <h3>Project 1</h3>
+                            </a>
+                            <iframe src="c:\project1-portfolio.pdf" width="100%" height="500px"></iframe>
+                        </div>
+                        <div class="project">
+                            <a href="project2.html">
+                                <img src="thumbnail2.jpg" alt="Project 2">
+                                <h3>Project 2</h3>
+                            </a>
+                        </div>
+                        <div class="project">
+                            <a href="project3.html">
+                                <img src="thumbnail3.jpg" alt="Project 3">
+                                <h3>Project 3</h3>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h3>Contact</h3>
+                    <p>Email: <a href="mailto:surankaryash@gmail.com">surankaryash@gmail.com</a></p>
+                    <p>Phone: +91 9699932924</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
