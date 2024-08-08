@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Quiz</title>
+    <link rel="stylesheet" href="quizz.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="glow">Interactive Quiz</h1>
+        </header>
+        
+        <main id="main-content">
+            <section id="home-screen" class="fade-in" aria-labelledby="home-screen-title">
+                <h2 id="home-screen-title" class="visually-hidden"> </h2>
+
+                <div class="info_box">
+                    <div class="info_title">
+                        <h3>Quiz Rules</h3>
+                    </div>
+                    <div class="info_list">
+                        <ul>
+                            <li> You have 20 seconds to answer each question.</li>
+                            <li> Click the "Next" button to proceed to the next question.</li>
+                            <li> Your score will be displayed at the end of the quiz.</li>
+                            <li> You can't restart the quiz once started .</li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <button id="start-general-knowledge" class="animated-button" aria-label="Start General Knowledge Quiz">Start General Knowledge Quiz</button>
+                <button id="start-math" class="animated-button" aria-label="Start Math Quiz">Start Math Quiz</button>
+            </section>
+            
+            <section id="timer" class="hidden fade-in glow" aria-live="polite">
+                <p>Time Remaining: <span id="time">20</span> seconds</p>
+            </section>
+            
+            <section id="quiz-container" class="hidden fade-in" aria-labelledby="question-section">
+                <h2 id="question-section" class="visually-hidden">Question Section</h2>
+                <div id="question-section">
+                    <p id="question" class="question-text">Welcome to the quiz!</p>
+                    <div id="answers" class="answer-container">
+                        <!-- Answer options will be inserted here -->
+                    </div>
+                </div>
+                <button id="next-button" class="hidden animated-button" aria-label="Next Question">Next</button>
+            </section>
+            
+            <section id="result" class="hidden fade-in" aria-labelledby="result-title">
+                <h2 id="result-title" class="result-title">Quiz Complete!</h2>
+                <p id="score" class="result-text"></p>
+                <div id="result-animation" class="hidden animate" aria-hidden="true">🎉</div>
+                <button id="restart-button" class="animated-button" aria-label="Restart Quiz">Restart Quiz</button>
+            </section>
+        </main>
+        
+        <footer>
+            <p>&copy; 2024 Interactive Quiz. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="quizzzz.js" defer></script>
+</body>
+</html>
