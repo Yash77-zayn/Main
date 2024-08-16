@@ -1,0 +1,315 @@
+/* Global Styles */
+body {
+    font-family: 'Roboto', sans-serif; /* Updated font for modern look */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+    background-color: #f4f4f4;
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+/* Toolbar */
+.toolbar {
+    background-color: #333;
+    color: #fff;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for better visibility */
+}
+
+.toolbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.toolbar-logo img {
+    height: 40px;
+    transition: transform 0.3s ease, filter 0.3s ease; /* Added filter transition for hover effect */
+}
+
+.toolbar-logo img:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2); /* Increased brightness for hover effect */
+}
+
+.toolbar-nav {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.toolbar-nav li {
+    margin: 0 15px;
+}
+
+.toolbar-nav a {
+    color: #fff;
+    text-decoration: none; /* Remove underline */
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease; /* Added text-shadow transition */
+}
+
+.toolbar-nav a:hover {
+    color: #f56c6c;
+    transform: scale(1.05);
+    text-shadow: 0 2px 4px rgba(255, 105, 97, 0.6); /* Added text-shadow effect */
+}
+
+/* CTA Button */
+.cta-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #f56c6c;
+    color: #fff;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease; /* Extended transition times */
+}
+
+.cta-button:hover {
+    background-color: #e53e3e;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow for hover effect */
+}
+
+/* Hero Section */
+header {
+    background: url('c:\shopping.jpg') no-repeat center center/cover;
+    color: #fff;
+    padding: 150px 0;
+    text-align: center;
+    position: relative;
+    margin-top: 60px; /* Offset for fixed toolbar */
+}
+
+header h1 {
+    font-size: 4em;
+    margin: 0;
+    animation: fadeIn 2s ease-out;
+}
+
+header p {
+    font-size: 1.5em;
+    margin: 10px 0;
+    animation: fadeIn 2s 0.5s ease-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Features */
+#features {
+    background-color: #fff;
+    padding: 50px 0;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+    animation: slideIn 1s ease-out;
+}
+
+.feature-image {
+    max-width: 100px;
+    height: auto;
+    margin-right: 20px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.feature-image:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2); /* Increased brightness for hover effect */
+}
+
+.feature-content {
+    text-align: left;
+}
+
+.feature-sticker {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #6cf57e;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 0.9em;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease; /* Added background-color transition */
+}
+
+.feature-sticker:hover {
+    background-color: #e53e3e;
+}
+
+/* Testimonials */
+#testimonials {
+    padding: 50px 0;
+}
+
+.testimonial {
+    background-color: #fff;
+    border-left: 5px solid #f56c6c;
+    padding: 25px;
+    margin-bottom: 30px;
+    font-style: italic;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease; /* Added transitions for border and shadow */
+}
+
+.testimonial:hover {
+    border-color: #e53e3e; /* Changed border color on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Pricing Plans */
+#pricing {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+}
+
+.pricing-plan {
+    border: 1px solid #0c0c0c;
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    background-color: #fff;
+    margin-bottom: 30px;
+    position: relative; /* For animation container */
+    overflow: hidden; /* Ensures animation doesn't overflow */
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease; /* Extended transition times */
+}
+
+.pricing-plan:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Color Animation for Pricing Plans */
+@keyframes colorChange {
+    0% { background-color: #4c4b4b; }
+    50% { background-color: #585757; }
+    100% { background-color: #5b5959; }
+}
+
+.pricing-plan:hover {
+    animation: colorChange 1s ease-in-out infinite; /* Infinite animation */
+}
+
+/* Delivery Status */
+.delivery-status {
+    background-color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.delivery-status h2 {
+    margin-bottom: 20px;
+}
+
+.delivery-icon {
+    max-width: 50px;
+    margin: 0 10px;
+    transition: transform 0.3s ease; /* Added transition for hover effect */
+}
+
+.delivery-icon:hover {
+    transform: scale(1.1); /* Scale icon on hover */
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 0;
+    text-align: center;
+}
+
+footer nav {
+    margin-bottom: 15px;
+}
+
+footer a {
+    color: #fff;
+    margin: 0 15px;
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease, text-shadow 0.3s ease; /* Added text-shadow transition */
+}
+
+footer a:hover {
+    color: #f56c6c;
+    text-shadow: 0 2px 4px rgba(255, 105, 97, 0.6); /* Added text-shadow effect */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .toolbar-nav {
+        display: none;
+    }
+
+    .toolbar-logo img {
+        height: 30px;
+    }
+
+    header h1 {
+        font-size: 2.5em;
+    }
+
+    header p {
+        font-size: 1.2em;
+    }
+
+    .feature {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    footer nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    footer a {
+        margin: 5px 0;
+    }
+}
