@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Love Game Website</title>
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      padding: 2rem;
+      background: radial-gradient(circle at top left, #ffd6e8, #ffe1f5);
+      animation: fadeIn 1.5s ease;
+      overflow: hidden;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      animation: pulse 2s infinite;
+      color: #d63384;
+      margin-bottom: 2rem;
+    }
+    input, button {
+      padding: 0.6rem;
+      margin: 0.25rem;
+      font-size: 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ff99c8;
+    }
+    .tab { display: none; }
+    .tab.active { display: block; animation: fadeIn 1s ease; }
+    .card {
+      background: white;
+      padding: 1rem;
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      margin-top: 1rem;
+      animation: fadeInUp 0.8s ease;
+      max-width: 400px;
+      width: 100%;
+    }
+    .players { margin: 1rem 0; font-size: 0.9rem; }
+    .question { font-weight: bold; margin: 1rem 0; text-align: center; }
+    .completed { color: green; font-weight: bold; }
+    .score { margin-top: 1rem; font-weight: bold; text-align: center; }
+    .compliment {
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      color: #c2185b;
+    }
+    #canvas {
+      width: 150px !important;
+      height: 150px !important;
+      display: block;
+      margin: 1rem auto;
+      transition: transform 0.5s ease;
+    }
+    #spinBtn, #spinAgainBtn {
+      display: block;
+      margin: 0 auto 1rem auto;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100px); opacity: 0; }
+    }
+    @keyframes pulse {
+      0% { color: #ff66b2; }
+      50% { color: #ff3399; }
+      100% { color: #ff66b2; }
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 2rem; }
+      #canvas { width: 120px !important; height: 120px !important; }
+    }
+  </style>
+</head>
+<body>
+  <h1>💞 Welcome to the Love Game 💞</h1>
+  <div style="display:flex; gap:10px; justify-content:center; margin-bottom:20px">
+    <button onclick="switchTab('matcher')">💘 Name Matcher</button>
+    <button onclick="switchTab('truth')">🎲 Truth & Dare</button>
+  </div>
+  <div id="matcher" class="tab card">
+    <input id="name1" placeholder="Your Name" />
+    <input id="name2" placeholder="Partner Name" />
+    <button onclick="matchLove()">Match 💖</button>
+    <div id="matchResult" style="margin-top: 1rem; font-size: 1.2rem;"></div>
+    <div id="complimentBar" class="compliment"></div>
+  </div>
+  <div id="truth" class="tab card">
+    <input id="playerInput" placeholder="Add Player" onkeydown="handlePlayerAdd(event)" />
+    <div id="playerList" class="players"></div>
+    <canvas id="canvas" width="150" height="150"></canvas>
+    <button id="spinBtn" onclick="spinWheel()">🎯 Spin the Wheel</button>
+    <div id="questionBox" class="question"></div>
+    <button onclick="markCompleted(true)">✅ Task Completed</button>
+    <button onclick="markCompleted(false)">❌ Not Completed</button>
+    <div id="scoreBoard" class="score"></div>
+    <div id="completedMsg" class="completed" style="display:none; text-align:center;">✅ All Tasks Completed! Game Over!</div>
+    <div id="spinAgainContainer" style="display:none; text-align:center; margin-top:10px;">
+      <button id="spinAgainBtn" onclick="spinAgain()">🔄 Spin Again</button>
+    </div>
+  </div>
+
+  <script>
+    let players = [], currentIndex = 0, scores = {}, questionsAsked = 0;
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+    let angle = 0, spinning = false;
+
+    function matchLove() {
+      const name1 = document.getElementById("name1").value.trim();
+      const name2 = document.getElementById("name2").value.trim();
+      if (!name1 || !name2) return;
+      const percentage = Math.floor(Math.random() * 41) + 60;
+      const resultText = `${name1} ❤️ ${name2} = ${percentage}% compatibility!`;
+      const compliments = [
+        "You're a perfect match!",
+        "You two are made for each other!",
+        "A match written in the stars!",
+        "Your bond is unbreakable!",
+        "Love is definitely in the air!",
+        "This is true love! 💘",
+        "You complete each other 💞"
+      ];
+      document.getElementById("matchResult").innerText = resultText;
+      document.getElementById("complimentBar").innerText = compliments[Math.floor(Math.random() * compliments.length)];
+    }
+
+    function drawWheel() {
+      const numSegments = players.length;
+      const center = canvas.width / 2;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < numSegments; i++) {
+        const startAngle = (2 * Math.PI / numSegments) * i + angle;
+        const endAngle = startAngle + (2 * Math.PI / numSegments);
+        ctx.beginPath();
+        ctx.moveTo(center, center);
+        ctx.arc(center, center, center, startAngle, endAngle);
+        ctx.fillStyle = `hsl(${(i * 360 / numSegments)}, 70%, 80%)`;
+        ctx.fill();
+        ctx.save();
+        ctx.translate(center, center);
+        ctx.rotate((startAngle + endAngle) / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#333";
+        ctx.font = "10px Comic Sans MS";
+        ctx.fillText(players[i], center - 10, 4);
+        ctx.restore();
+      }
+    }
+
+    function spinWheel() {
+      if (spinning || players.length === 0) return;
+      spinning = true;
+      let duration = 3000;
+      let spinAngle = Math.random() * Math.PI * 10 + Math.PI * 4;
+      const start = performance.now();
+
+      function animate(now) {
+        let elapsed = now - start;
+        let progress = Math.min(elapsed / duration, 1);
+        angle += (spinAngle * (1 - Math.pow(1 - progress, 3)));
+        drawWheel();
+        if (progress < 1) requestAnimationFrame(animate);
+        else {
+          spinning = false;
+          let selectedIndex = players.length - Math.floor(((angle % (2 * Math.PI)) / (2 * Math.PI)) * players.length) - 1;
+          currentIndex = selectedIndex;
+          const selectedPlayer = players[selectedIndex];
+          const question = truthQuestions[Math.floor(Math.random() * truthQuestions.length)];
+          document.getElementById("questionBox").innerText = `${selectedPlayer} spins...\n${question}`;
+          document.getElementById("spinAgainContainer").style.display = "block";
+          questionsAsked++;
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    function spinAgain() {
+      document.getElementById("spinAgainContainer").style.display = "none";
+      document.getElementById("questionBox").innerText = "";
+      spinWheel();
+    }
+
+    function switchTab(tab) {
+      document.querySelectorAll('.tab').forEach(div => div.classList.remove('active'));
+      document.getElementById(tab).classList.add('active');
+      drawWheel();
+    }
+
+    function handlePlayerAdd(e) {
+      if (e.key === "Enter" && e.target.value.trim()) {
+        const name = e.target.value.trim();
+        if (!players.includes(name)) {
+          players.push(name);
+          scores[name] = 0;
+        }
+        e.target.value = "";
+        updatePlayers();
+        drawWheel();
+      }
+    }
+
+    function updatePlayers() {
+      document.getElementById('playerList').innerText = `Players: ${players.join(', ')}`;
+      updateScores();
+    }
+
+    function markCompleted(completed) {
+      const player = players[currentIndex % players.length];
+      if (completed) scores[player] += 1;
+      const result = completed ? '✅ Completed' : '❌ Not Completed';
+      document.getElementById("questionBox").innerText += `\n${player}: ${result}`;
+      updateScores();
+    }
+
+    function updateScores() {
+      const scoreBoard = Object.entries(scores).map(([p, s]) => `${p}: ${s} pts`).join(' | ');
+      document.getElementById('scoreBoard').innerText = scoreBoard;
+      if (questionsAsked > 0 && questionsAsked >= players.length * 2) {
+        document.getElementById('completedMsg').style.display = 'block';
+      }
+    }
+
+    const truthQuestions = [
+      "What's your biggest turn-on?",
+      "Have you ever had a secret crush?",
+      "What's a fantasy you've never told anyone?",
+      "What's your most romantic memory?",
+      "What would you do on your dream date?",
+      "What's the wildest thing you've done in love?",
+      "Have you ever written a love letter?",
+      "Have you ever been in love at first sight?",
+      "Would you go skinny dipping with your crush?",
+      "What's your favorite physical feature in a partner?",
+      "Would you kiss on a first date?",
+      "Have you ever had a crush on a teacher?",
+      "Have you ever sent a flirty text to the wrong person?",
+      "What’s the craziest place you've kissed someone?",
+      "What's a secret you’ve kept from your partner?",
+      "What’s your idea of a perfect relationship?",
+      "Would you try a long-distance relationship?",
+      "What’s the most romantic thing someone’s done for you?",
+      "Do you believe in soulmates?",
+      "Would you ever do a couple’s photoshoot?"
+    ];
+  </script>
+</body>
+</html>
